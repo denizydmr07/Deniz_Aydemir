@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './list.module.css';
 
+// Define the user interface
 interface User {
   id: string;
   username: string;
   password: string;
 }
 
+
+// Define the property type
 interface UserListItemProps {
   user: User;
   selected: boolean;
@@ -20,48 +23,87 @@ interface UserListItemProps {
   onClick: () => void;
 }
 
+// Define the UserListItem component
 const UserListItem: React.FC<UserListItemProps> = (props) => {
+
+  // Destructure the properties
   const { user, selected, editMode, deleteMode, newMode, setEditMode, setDeleteMode, setNewMode, onClick } = props;
+
+  // Define the state variables for the component
   const [id, setId] = useState<string>(user.id);
   const [username, setUsername] = useState<string>(user.username);
   const [password, setPassword] = useState<string>(user.password);
   
+  /**
+   * Delete the user
+   */
   const deleteUser = async () => {
+
     console.log("Deleting user");
+
+    // Send a DELETE request
     await axios.delete(`http://localhost:8080/deleteUser?id=${id}`, 
     ).then(response => {
+
+      // Handle success
       console.log(response);
       alert(response)
     }).catch(error => {
+
+      // Handle error
       console.error('Error deleting user:', error);
     });
 
+    // Reload the page
     window.location.reload();
   }
 
+  /**
+   * Update the user
+   */
   const updateUser = async () => {
     console.log("Updating user");
+
+    // Send a PUT request
     await axios.put(`http://localhost:8080/updateUser?id=${id}&username=${username}&password=${password}`, 
     ).then(response => {
+
+      // Handle success
       console.log(response.data.message);
     }).catch(error => {
+
+      // Handle error
       console.error('Error updating user:', error);
     });
 
+    // Reload the page
     window.location.reload();
   }
 
+  /**
+   * Create a new user
+   */
   const createNewUser = async () => {
     console.log("Creating new user");
+
+    // Send a POST request
     await axios.post(`http://localhost:8080/saveUser?username=${username}&password=${password}`, 
     ).then(response => {
+
+      // Handle success
       console.log(response.data.message);
     }).catch(error => {
+
+      // Handle error
       console.error('Error creating new user:', error);
     });
 
+
+    // Reload the page
     window.location.reload();
   }
+
+  // Return the JSX element
   return (
     <div className={`${styles.list_item} ${selected ? styles.selected : ''}`} onClick={onClick}>
       <div>
@@ -193,55 +235,93 @@ const UserListItem: React.FC<UserListItemProps> = (props) => {
   );
 };
 
+
+// Define the UserList component
 const UserList: React.FC = () => {
+
+  // Define the state variables for the component
   const [users, setUsers] = useState<User[]>([]);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [deleteMode, setDeleteMode] = useState<boolean>(false);
   const [newMode, setNewMode] = useState<boolean>(false);
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
+
+  /**
+   * Handle the edit button click
+   */
   const handleEdit = () => {
+
+    // Set the edit mode
     setEditMode(true);
     setDeleteMode(false);
     setNewMode(false);
   };
 
+
+  /**
+   * Handle the delete button click
+   */
   const handleDelete = () => {
+
+    // Set the delete mode
     setDeleteMode(true);
     setEditMode(false);
     setNewMode(false);
   };
 
+  /**
+   * Handle the new button click
+   */
   const handleNew = () => {
+
+    // Set the new mode
+    // disable edit and delete modes
     setSelectedIndex(-1);
     setNewMode(true);
     setEditMode(false);
     setDeleteMode(false);
   }
 
+  /**
+   * Handle the user selection
+   * @param index The index of the selected user
+   */
   const handleSelection = (index: number) => {
 
+    // if we click on the same user, disable edit and delete modes
     if (index !== selectedIndex) {
       setEditMode(false);
       setDeleteMode(false);
     }
+
+    // Set the selected index
     setSelectedIndex(index);
     console.log("Selected index: " + index);
   };
 
+
+  /**
+   * Fetch the users when the component mounts
+   */
   useEffect(() => {
     console.log("Fetching users");
     // Fetch data using Axios when the component mounts
     axios.get('http://localhost:8080/getUsers') // Replace with your API endpoint
       .then(response => {
+
+        // Set the state variable
         setUsers(response.data);
         console.log("Users fetched");
       })
       .catch(error => {
+
+        // Handle error
         console.error('Error fetching data:', error);
       });
   }, []);
 
+  // Return the JSX element
   return (
     <div className={styles.list}>
       <div className={styles.buttons}> 
