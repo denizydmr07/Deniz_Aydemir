@@ -42,7 +42,7 @@ const UserListItem: React.FC<UserListItemProps> = (props) => {
     console.log("Deleting user");
 
     // Send a DELETE request
-    await axios.delete(`http://localhost:8080/deleteUser?id=${id}`, 
+    await axios.delete(`http://localhost:8080/api/deleteUser?id=${id}`, 
     ).then(response => {
 
       // Handle success
@@ -65,7 +65,7 @@ const UserListItem: React.FC<UserListItemProps> = (props) => {
     console.log("Updating user");
 
     // Send a PUT request
-    await axios.put(`http://localhost:8080/updateUser?id=${id}&username=${username}&password=${password}`, 
+    await axios.put(`http://localhost:8080/api/updateUser?id=${id}&username=${username}&password=${password}`, 
     ).then(response => {
 
       // Handle success
@@ -87,7 +87,7 @@ const UserListItem: React.FC<UserListItemProps> = (props) => {
     console.log("Creating new user");
 
     // Send a POST request
-    await axios.post(`http://localhost:8080/saveUser?username=${username}&password=${password}`, 
+    await axios.post(`http://localhost:8080/api/saveUser?username=${username}&password=${password}`, 
     ).then(response => {
 
       // Handle success
@@ -308,7 +308,7 @@ const UserList: React.FC = () => {
   useEffect(() => {
     console.log("Fetching users");
     // Fetch data using Axios when the component mounts
-    axios.get('http://localhost:8080/getUsers') // Replace with your API endpoint
+    axios.get('http://localhost:8080/api/getUsers') // Replace with your API endpoint
       .then(response => {
 
         // Set the state variable

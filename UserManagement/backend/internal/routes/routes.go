@@ -34,35 +34,35 @@ func NewRouter() http.Handler {
 	// Function to add a new user
 	// It takes a handler function as a parameter
 	// It returns a handler function
-	mux.HandleFunc("/saveUser", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/api/saveUser", func(w http.ResponseWriter, r *http.Request) {
 		controllers.SaveUser(w, r)
 	})
 
 	// Function to get all users
 	// It takes a handler function as a parameter
 	// It returns a handler function
-	mux.HandleFunc("/getUsers", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/api/getUsers", func(w http.ResponseWriter, r *http.Request) {
 		controllers.GetUsers(w, r)
 	})
 
 	// Function to get a user with a specific ID
 	// It takes a handler function as a parameter
 	// It returns a handler function
-	mux.HandleFunc("/getUser", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/api/getUser", func(w http.ResponseWriter, r *http.Request) {
 		controllers.GetUserWithID(w, r)
 	})
 
 	// Function to update a user
 	// It takes a handler function as a parameter
 	// It returns a handler function
-	mux.HandleFunc("/updateUser", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/api/updateUser", func(w http.ResponseWriter, r *http.Request) {
 		controllers.UpdateUser(w, r)
 	})
 
 	// Function to delete a user
 	// It takes a handler function as a parameter
 	// It returns a handler function
-	mux.HandleFunc("/deleteUser", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("/api/deleteUser", func(w http.ResponseWriter, r *http.Request) {
 		controllers.DeleteUser(w, r)
 	})
 
