@@ -293,6 +293,7 @@ const UserList: React.FC = () => {
     if (index !== selectedIndex) {
       setEditMode(false);
       setDeleteMode(false);
+      setNewMode(false);
     }
 
     // Set the selected index
@@ -325,12 +326,12 @@ const UserList: React.FC = () => {
   return (
     <div className={styles.list}>
       <div className={styles.buttons}> 
-        <button onClick={handleNew}>New</button>
+        <button className={styles.new} id="new" onClick={handleNew}>New</button>
         {selectedIndex !== -1 && (
-          <button onClick={handleEdit}>Edit</button>
+          <button className={styles.edit} id = "edit" onClick={handleEdit}>Edit</button>
         )}
         {selectedIndex !== -1 && (
-          <button onClick={handleDelete}>Delete</button>
+          <button className={styles.delete} id="delete" onClick={handleDelete}>Delete</button>
         )
         }
       </div>

@@ -43,28 +43,68 @@
 .buttons {
     display: flex;
     justify-content: center;
-    background-color: aquamarine;
+    background-color: rgb(255, 246, 235);
+    border: 1px solid #d6d6d6;
     width: 800px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    
 }
 
-.buttons button {
+.new {
     margin: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
     padding: 10px;
     border-radius: 5px;
     border: none;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 300ms ease-in-out;
+
+    background-color: rgb(195, 255, 235);
 }
 
-.buttons button:hover {
-    transform: scale(1.02);
+.edit {
+    margin: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease-in-out;
+
+    background-color: rgb(255, 255, 195);
+}
+
+.delete {
+    margin: 10px;
+    margin-left: 40px;
+    margin-right: 40px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 300ms ease-in-out;
+
+    background-color: rgb(255, 195, 195);
+}
+
+.new:hover {
+    transform: scale(1.1);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.buttons button:active {
-    transform: scale(1);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.edit:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+.delete:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
